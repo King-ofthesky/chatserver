@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+//package  msg;  //类似于命名空间
+// 设计方法 id 加proto嵌套  一个空字段占1字节  如果业务有n个 每次发送消息都至少n字节
+
+message msg{
+  int32 id = 1; 
+  LogRequestProto logreq= 2;
+  LogResponseProto logres = 3;
+
+  //... n
+}
+
+
+//登录请求字段
+message LogRequestProto {
+  int32 ptrid = 1;  //第一个字段
+  string name = 2;  ////第二个字段
+  string pwd = 3;
+}
+
+//登录响应消息的字段
+message LogResponseProto{
+  int32 ptrid =1;  // int32  32位整数 
+  int32 errcode = 2;
+  string msg = 3;
+  bool success = 4;
+}
+
+
+
+
+// protoc --cpp_out=. message.proto
